@@ -17,6 +17,23 @@ def fetch_json_content(url, params=None):
         return None
 
 
+def get_essential_afisha_movie_info(movie_info):
+    return {
+        'name': movie_info['Name'],
+        'year': int(
+            re.findall(r'\d+', movie_info['ProductionYear'])[0],
+        ),
+        'country': movie_info['Country'],
+        'duration': movie_info['Duration'],
+        'age_restriction': movie_info['AgeRestriction'],
+        'afisha_url': 'https://www.afisha.ru{}'.format(
+            movie_info['Url'],
+        ),
+        'screenshot_url': None if movie_info['Image315x315'] is None
+        else movie_info['Image315x315']['Url']
+    }
+
+
 def get_afisha_movies_info(scheduled_date):
     page_number = 1
 
@@ -34,20 +51,7 @@ def get_afisha_movies_info(scheduled_date):
             break
 
         yield [
-            {
-                'name': movie_info['Name'],
-                'year': int(
-                    re.findall(r'\d+', movie_info['ProductionYear'])[0],
-                ),
-                'country': movie_info['Country'],
-                'duration': movie_info['Duration'],
-                'age_restriction': movie_info['AgeRestriction'],
-                'afisha_url': 'https://www.afisha.ru{}'.format(
-                    movie_info['Url'],
-                ),
-                'screenshot_url': None if movie_info['Image315x315'] is None
-                else movie_info['Image315x315']['Url']
-            }
+            get_essential_afisha_movie_info(movie_info)
             for movie_info in afisha_movies_info_page['MovieList']['Items']
         ]
 
