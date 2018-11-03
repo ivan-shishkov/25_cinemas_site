@@ -25,6 +25,7 @@ def get_essential_afisha_movie_info(movie_info):
         ),
         'country': movie_info['Country'],
         'duration': movie_info['Duration'],
+        'description': movie_info['Description'],
         'age_restriction': movie_info['AgeRestriction'],
         'afisha_url': 'https://www.afisha.ru{}'.format(
             movie_info['Url'],
