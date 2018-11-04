@@ -26,6 +26,23 @@
     </nav>
 
     <div class="container">
+      <div class="row">
+        {% for movie_info in movies_info %}
+          <div class="col-md-6">
+            <div class="card mb-5">
+              <img class="card-img-top" src="{{ movie_info.screenshot_url }}" alt="Скриншот из фильма">
+              <div class="card-body">
+                <a href="{{ movie_info.afisha_url }}"><h5 class="card-title">{{ movie_info.name }}</h5></a>
+                <p class="card-text">{{ movie_info.country }}, {{ movie_info.year }} год</p>
+                <p class="card-text">Возрастные ограничения: {{ movie_info.age_restriction }}</p>
+                <p class="card-text">Продолжительность: {{ movie_info.duration }}</p>
+                <p class="card-text">{{ movie_info.description }}</p>
+                <p class="card-text">рейтинг: {{ movie_info.rating }}, голосов: {{ movie_info.votes }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
     </div>
 
     <!-- Optional JavaScript -->
