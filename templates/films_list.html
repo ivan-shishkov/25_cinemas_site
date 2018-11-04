@@ -38,7 +38,11 @@
         {% for movie_info in movies_info %}
           <div class="col-md-6">
             <div class="card mb-5">
-              <img class="card-img-top" src="{{ movie_info.screenshot_url }}" alt="Скриншот из фильма">
+              {% if movie_info.screenshot_url is none %}
+                <img class="card-img-top" src="https://via.placeholder.com/800x450.jpg" alt="Скриншот из фильма">
+              {% else %}
+                <img class="card-img-top" src="{{ movie_info.screenshot_url }}" alt="Скриншот из фильма">
+              {% endif %}
               <div class="card-body">
                 <a href="{{ movie_info.afisha_url }}"><h5 class="card-title">{{ movie_info.name }}</h5></a>
                 <p class="card-text">{{ movie_info.country }}, {{ movie_info.year }} год</p>

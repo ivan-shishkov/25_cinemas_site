@@ -30,8 +30,7 @@ def get_essential_afisha_movie_info(movie_info):
         'afisha_url': 'https://www.afisha.ru{}'.format(
             movie_info['Url'],
         ),
-        'screenshot_url': 'https://via.placeholder.com/800x450.jpg'
-        if movie_info['Image315x315'] is None
+        'screenshot_url': None if movie_info['Image315x315'] is None
         else movie_info['Image315x315']['Url']
     }
 
