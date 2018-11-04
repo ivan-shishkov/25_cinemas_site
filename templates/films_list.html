@@ -26,6 +26,14 @@
     </nav>
 
     <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-12 text-center">
+          <h3>
+            Топ {{ movies_info|length }} фильмов с самым высоким рейтингом, идущих сегодня в
+            кинотеатрах Москвы
+          </h3>
+        </div>
+      </div>
       <div class="row">
         {% for movie_info in movies_info %}
           <div class="col-md-6">
@@ -42,6 +50,14 @@
             </div>
           </div>
         {% endfor %}
+      </div>
+      <div class="row mb-4">
+        <div class="col-md-12 text-center border border-danger">
+          <h4>
+            Настоящий сайт создан в исключительно учебных целях. Все сведения о фильмах взяты с
+            сайтов <a href="https://www.afisha.ru/">Афиша</a> и <a href="https://www.kinopoisk.ru/">Кинопоиск</a>.
+          </h4>
+        </div>
       </div>
     </div>
 
