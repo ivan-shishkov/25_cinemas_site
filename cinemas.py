@@ -1,5 +1,6 @@
 from datetime import date
 import re
+from multiprocessing.pool import ThreadPool
 
 import requests
 from requests.exceptions import ConnectionError
@@ -100,10 +101,11 @@ def add_kinopoisk_movie_rating_info(afisha_movie_info):
 
 
 def add_kinopoisk_movies_rating_info(afisha_movies_info):
-    return [
-        add_kinopoisk_movie_rating_info(afisha_movie_info)
-        for afisha_movie_info in afisha_movies_info
-    ]
+    pool = ThreadPool(processes=8)
+
+    movies_info = pool.map(add_kinopoisk_movie_rating_info, afisha_movies_info)
+
+    return movies_info
 
 
 def get_top_rated_movies_info(movies_count=10):
