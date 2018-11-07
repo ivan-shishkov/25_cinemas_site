@@ -70,11 +70,13 @@ def get_normalized_movie_name(movie_name):
 def get_kinopoisk_movie_rating_info(afisha_movie_info):
     movie_rating = movie_votes = None
 
-    movies = Movie.objects.search(afisha_movie_info['name'])
-
     normalized_afisha_movie_name = get_normalized_movie_name(
         afisha_movie_info['name'],
     )
+    try:
+        movies = Movie.objects.search(afisha_movie_info['name'])
+    except ConnectionError:
+        movies = []
 
     for movie in movies:
         normalized_movie_name = get_normalized_movie_name(
