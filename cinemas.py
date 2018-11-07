@@ -102,8 +102,8 @@ def add_kinopoisk_movie_rating_info(afisha_movie_info):
     return movie_info
 
 
-def add_kinopoisk_movies_rating_info(afisha_movies_info):
-    pool = ThreadPool(processes=8)
+def add_kinopoisk_movies_rating_info(afisha_movies_info, count_threads=8):
+    pool = ThreadPool(processes=count_threads)
 
     movies_info = pool.map(add_kinopoisk_movie_rating_info, afisha_movies_info)
 
