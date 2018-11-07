@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_caching import Cache
 
 from cinemas import get_top_rated_movies_info
@@ -17,6 +17,11 @@ def films_list():
     movies_info = get_movies_info()
 
     return render_template('films_list.html', movies_info=movies_info)
+
+
+@app.route('/api/top-rated-movies')
+def top_rated_movies():
+    return jsonify(top_rated_movies_info=get_movies_info())
 
 
 if __name__ == "__main__":
