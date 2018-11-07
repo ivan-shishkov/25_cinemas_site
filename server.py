@@ -19,6 +19,11 @@ def films_list():
     return render_template('films_list.html', movies_info=movies_info)
 
 
+@app.route('/api')
+def api_info():
+    return render_template('api_info.html')
+
+
 @app.route('/api/top-rated-movies')
 def top_rated_movies():
     return jsonify(top_rated_movies_info=get_movies_info())

@@ -28,33 +28,46 @@
 
     <div class="container">
       <div class="row mb-4">
-        <div class="col-md-12 text-center">
-          <h3>
-            Топ {{ movies_info|length }} фильмов с самым высоким рейтингом, идущих сегодня в
-            кинотеатрах Москвы
-          </h3>
+        <div class="col-md-12">
+          <p>
+            Данный сервис предоставляет публичное API, позволяющее получить информацию о
+            топ-10 фильмах с самым высоким рейтингом, идущих сегодня в кинотеатрах Москвы,
+            в формате JSON. Для этого необходимо обратиться по адресу
+            <a href="/api/top-rated-movies">/api/top-rated-movies</a>
+          </p>
+          <p>Формат ответа:</p>
+            <pre>
+          {
+              "top_rated_movies_info": [
+                  {
+                      "afisha_url": ...,
+                      "age_restriction": ...,
+                      "country": ...,
+                      "description": ...,
+                      "duration": ...,
+                      "name": ...,
+                      "rating": ...,
+                      "screenshot_url": ...,
+                      "votes": ...,
+                      "year": ...
+                  },
+                  ...
+              ]
+          }
+        </pre>
+          <ul>
+            <li><b>afisha_url</b> - ссылка на Афиша.ру с информацией о фильме</li>
+            <li><b>age_restriction</b> - возрастные ограничения</li>
+            <li><b>country</b> - страна производства</li>
+            <li><b>description</b> - описание фильма</li>
+            <li><b>duration</b> - продолжительность фильма</li>
+            <li><b>name</b> - название фильма</li>
+            <li><b>rating</b> - рейтинг фильма на Кинопоиск.ру</li>
+            <li><b>screenshot_url</b> - ссылка на скриншот из фильма</li>
+            <li><b>votes</b> - количество голосов на Кинопоиск.ру</li>
+            <li><b>year</b> - год производства</li>
+          </ul>
         </div>
-      </div>
-      <div class="row">
-        {% for movie_info in movies_info %}
-          <div class="col-md-6">
-            <div class="card mb-5">
-              {% if movie_info.screenshot_url is none %}
-                <img class="card-img-top" src="https://via.placeholder.com/800x450.jpg" alt="Скриншот из фильма">
-              {% else %}
-                <img class="card-img-top" src="{{ movie_info.screenshot_url }}" alt="Скриншот из фильма">
-              {% endif %}
-              <div class="card-body">
-                <a href="{{ movie_info.afisha_url }}"><h5 class="card-title">{{ movie_info.name }}</h5></a>
-                <p class="card-text">{{ movie_info.country }}, {{ movie_info.year }} год</p>
-                <p class="card-text">Возрастные ограничения: {{ movie_info.age_restriction }}</p>
-                <p class="card-text">Продолжительность: {{ movie_info.duration }}</p>
-                <p class="card-text">{{ movie_info.description }}</p>
-                <p class="card-text">рейтинг: {{ movie_info.rating }}, голосов: {{ movie_info.votes }}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
       </div>
       <div class="row mb-4">
         <div class="col-md-12 text-center border border-danger">
