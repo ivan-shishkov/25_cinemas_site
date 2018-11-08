@@ -1,75 +1,32 @@
-<!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <meta name="description" content="Что в кино">
-    <meta name="author" content="">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
-    <title>Что в кино</title>
-
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">Что в кино</a>
-          <a class="navbar-brand" href="/api">API</a>
-        </div>
-      </div>
-    </nav>
-
-    <div class="container">
-      <div class="row mb-4">
-        <div class="col-md-12 text-center">
-          <h3>
-            Топ {{ movies_info|length }} фильмов с самым высоким рейтингом, идущих сегодня в
-            кинотеатрах Москвы
-          </h3>
-        </div>
-      </div>
-      <div class="row">
-        {% for movie_info in movies_info %}
-          <div class="col-md-6">
-            <div class="card mb-5">
-              {% if movie_info.screenshot_url is none %}
-                <img class="card-img-top" src="https://via.placeholder.com/800x450.jpg" alt="Скриншот из фильма">
-              {% else %}
-                <img class="card-img-top" src="{{ movie_info.screenshot_url }}" alt="Скриншот из фильма">
-              {% endif %}
-              <div class="card-body">
-                <a href="{{ movie_info.afisha_url }}"><h5 class="card-title">{{ movie_info.name }}</h5></a>
-                <p class="card-text">{{ movie_info.country }}, {{ movie_info.year }} год</p>
-                <p class="card-text">Возрастные ограничения: {{ movie_info.age_restriction }}</p>
-                <p class="card-text">Продолжительность: {{ movie_info.duration }}</p>
-                <p class="card-text">{{ movie_info.description }}</p>
-                <p class="card-text">рейтинг: {{ movie_info.rating }}, голосов: {{ movie_info.votes }}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-      <div class="row mb-4">
-        <div class="col-md-12 text-center border border-danger">
-          <h4>
-            Настоящий сайт создан в исключительно учебных целях. Все сведения о фильмах взяты с
-            сайтов <a href="https://www.afisha.ru/">Афиша</a> и <a href="https://www.kinopoisk.ru/">Кинопоиск</a>.
-          </h4>
-        </div>
-      </div>
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row mb-4">
+    <div class="col-md-12 text-center">
+      <h3>
+        Топ {{ movies_info|length }} фильмов с самым высоким рейтингом, идущих сегодня в
+        кинотеатрах Москвы
+      </h3>
     </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
-</html>
+  </div>
+  <div class="row">
+    {% for movie_info in movies_info %}
+      <div class="col-md-6">
+        <div class="card mb-5">
+          {% if movie_info.screenshot_url is none %}
+            <img class="card-img-top" src="https://via.placeholder.com/800x450.jpg" alt="Скриншот из фильма">
+          {% else %}
+            <img class="card-img-top" src="{{ movie_info.screenshot_url }}" alt="Скриншот из фильма">
+          {% endif %}
+          <div class="card-body">
+            <a href="{{ movie_info.afisha_url }}"><h5 class="card-title">{{ movie_info.name }}</h5></a>
+            <p class="card-text">{{ movie_info.country }}, {{ movie_info.year }} год</p>
+            <p class="card-text">Возрастные ограничения: {{ movie_info.age_restriction }}</p>
+            <p class="card-text">Продолжительность: {{ movie_info.duration }}</p>
+            <p class="card-text">{{ movie_info.description }}</p>
+            <p class="card-text">рейтинг: {{ movie_info.rating }}, голосов: {{ movie_info.votes }}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
