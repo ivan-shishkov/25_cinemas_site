@@ -1,6 +1,9 @@
 # Cinemas Site
 
-{TODO. There will be project description}
+This service allows to get info about the movies that are today in Moscow cinemas, and have the highest rating, based on data from the sites [afisha.ru](https://afisha.ru) and [kinopoisk.ru](https://kinopoisk.ru).
+Besides, the service has a public API, which allows to get info about movies in JSON format.
+Online version of service is available [here](https://top-rated-movie.herokuapp.com/).
+
 
 # Project Goals
 
